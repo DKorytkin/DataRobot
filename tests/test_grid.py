@@ -90,7 +90,7 @@ def test_grid_iteration(grid):
     """
     for row in grid:
         assert isinstance(row, list)
-        assert any(isinstance(letter, str) for letter in row)
+        assert all(isinstance(letter, str) for letter in row)
 
 
 def test_grid_max_size(grid):
@@ -157,10 +157,26 @@ def test_grid_lines(grid):
     ]
     """
     exp_lines = [
-        'am', 'ma', 'bo', 'ob', 'cy', 'yc',
-        'abc', 'cba', 'moy', 'yom',
-        "ao", "oa", "by", "yb", "c",
-        "a", "bm", "mb", "co", "oc"
+        "am",
+        "ma",
+        "bo",
+        "ob",
+        "cy",
+        "yc",
+        "abc",
+        "cba",
+        "moy",
+        "yom",
+        "ao",
+        "oa",
+        "by",
+        "yb",
+        "c",
+        "a",
+        "bm",
+        "mb",
+        "co",
+        "oc",
     ]
     assert grid._lines is None
     result = grid.lines

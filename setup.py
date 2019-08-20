@@ -19,7 +19,7 @@ if __name__ == "__main__":
         url="https://github.com/DKorytkin/puzzle",
         packages=find_packages(exclude=["tests"]),
         include_package_data=True,
-        package_data={'': ['words.txt']},
+        package_data={'': ['*.txt']},
         entry_points={"console_scripts": ['puzzle = puzzle.cli:main']},
         py_modules=["puzzle", "puzzle.app", "puzzle.cli"],
         platforms=['linux'],
