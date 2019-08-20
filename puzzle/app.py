@@ -15,11 +15,11 @@ def read_words(path: str) -> Iterator:
     :param str path: fro example ./words.txt
     :return: words iterator
     """
-    p = Path(path)
+    p = Path(__file__).resolve().parent / path
     if not (p.exists() and p.is_file()):
-        raise FileNotFoundError("Please, check your path to file")
+        raise FileNotFoundError(f"Please, check your path to file {p}")
 
-    with open(path, "r") as f:
+    with open(p, "r") as f:
         for line in f.readlines():
             yield line.strip()
 

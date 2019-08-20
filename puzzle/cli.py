@@ -22,7 +22,7 @@ def parser(args):
         "--file",
         dest="file",
         type=str,
-        default="puzzle/words.txt",
+        default="words.txt",
         help="you can to change file with words",
     )
     menu.add_argument(
