@@ -2,6 +2,8 @@
 Repository for test exercise only
 
 [![Build Status](https://travis-ci.com/DKorytkin/puzzle.svg?branch=data_robot_homework)](https://travis-ci.com/DKorytkin/puzzle)
+[![Cov](https://codecov.io/gh/DKorytkin/puzzle/branch/data_robot_homework/graph/badge.svg)](https://codecov.io/gh/DKorytkin/puzzle/branch/data_robot_homework)
+
 
 Application generate random crossword puzzle and try to find exist words from file
 
