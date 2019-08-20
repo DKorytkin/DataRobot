@@ -9,17 +9,16 @@ from typing import List, Set, Iterator, Iterable
 GRID_TYPE = List[List[str]]
 
 
-def read_words(path: str) -> Iterator:
+def read_words(path: Path) -> Iterator:
     """
     Lazy read words from file
-    :param str path: fro example ./words.txt
+    :param Path path: fro example ./words.txt
     :return: words iterator
     """
-    p = Path(__file__).resolve().parent / path
-    if not (p.exists() and p.is_file()):
-        raise FileNotFoundError(f"Please, check your path to file {p}")
+    if not (path.exists() and path.is_file()):
+        raise FileNotFoundError(f"Please, check your path to file {path}")
 
-    with open(p, "r") as f:
+    with open(path, "r") as f:
         for line in f.readlines():
             yield line.strip()
 

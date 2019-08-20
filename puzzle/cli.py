@@ -1,4 +1,5 @@
 import sys
+from pathlib import Path
 
 from argparse import ArgumentParser, ArgumentTypeError
 
@@ -21,8 +22,8 @@ def parser(args):
         "-f",
         "--file",
         dest="file",
-        type=str,
-        default="words.txt",
+        type=Path,
+        default=Path(__file__).resolve().parent / "words.txt",
         help="you can to change file with words",
     )
     menu.add_argument(
