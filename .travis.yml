@@ -1,0 +1,14 @@
+dist: xenial
+language: python
+python:
+- '3.6'
+- '3.7'
+
+install:
+- pip install -U -r requirements-dev.txt
+
+script:
+- pytest tests/ --cov-report xml --cov=puzzle
+
+after_success:
+- codecov -t "$CODECOV_TOKEN"
