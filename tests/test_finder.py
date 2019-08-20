@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 from typing import Iterator
 
 import pytest
@@ -17,8 +18,8 @@ WORDS = ["ci", "by", "an", "test", "and", "apple", "in", "abc"]
 
 
 @pytest.fixture(scope="module")
-def file_path() -> str:
-    f_path = "secret_file_path.txt"
+def file_path() -> Path:
+    f_path = Path("secret_file_path.txt")
     with open(f_path, "+w") as f:
         f.write("\n".join(WORDS))
     yield f_path
@@ -43,7 +44,7 @@ def test_read_words(file_path):
 
 def test_read_words_with_invalid_path():
     with pytest.raises(FileNotFoundError):
-        assert list(read_words("test_read_words_with_invalid_path.txt"))
+        assert list(read_words(Path("test_read_words_with_invalid_path.txt")))
 
 
 def test_filter_by_letters():
