@@ -267,9 +267,6 @@ class Finder:
         :return: found words
         """
         exist_words = []
-        if self.grid.max_size < 1:
-            return exist_words
-
         all_possible_lines = "|".join(self.grid.lines)
         words = read_words(file_path)
         words = filter_by_length(words, self.grid.max_size)
