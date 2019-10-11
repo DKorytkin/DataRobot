@@ -1,0 +1,38 @@
+# fro codecov
+certifi==2019.6.16
+chardet==3.0.4
+idna==2.8
+requests==2.22.0
+urllib3==1.25.3
+
+# for flake8
+entrypoints==0.3
+mccabe==0.6.1
+pycodestyle==2.5.0
+pyflakes==2.1.1
+
+# for black
+appdirs==1.4.3
+click==7.0
+toml==0.10.0
+
+# for pytest
+atomicwrites==1.3.0
+attrs==19.1.0
+importlib-metadata==0.19
+more-itertools==7.2.0
+packaging==19.1
+pluggy==0.12.0
+py==1.8.0
+pyparsing==2.4.2
+six==1.12.0
+wcwidth==0.1.7
+zipp==0.5.2
+
+# for tests
+pytest==5.0.1
+coverage==4.5.4
+codecov==2.0.15
+pytest-cov==2.7.1
+flake8==3.7.8
+black==19.3b0
