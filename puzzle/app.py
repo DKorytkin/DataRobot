@@ -120,93 +120,61 @@ class Grid:
             self._letters = {l for l in itertools.chain(*self.grid)}
         return self._letters
 
-    @property
-    def horizontal_lines(self) -> List[str]:
-        """
-        Get all horizontal lines of grid
-        also revert line included
-        >>> self.grid
-        [
-            ['u', 'f', 'h'],
-            ['o', 'q', 'i'],
-        ]
-        >>> self.horizontal_lines
-        ["ufh", "hfu", "oqi", "iqo"]
-        """
-        rows = []
-        for row in self.grid:
-            letters = "".join(row)
-            rows.append(letters)
-            rows.append(letters[::-1])
-        return rows
-
-    @property
-    def vertical_lines(self) -> List[str]:
-        """
-        Get all vertical lines of grid
-        also revert line included
-        >>> self.grid
-        [
-            ['u', 'f', 'h'],
-            ['o', 'q', 'i'],
-        ]
-        >>> self.vertical_lines
-        ["uo", "ou", "fq", "qf", "hi", "ih"]
-        """
-        columns = []
-        for column_index in range(0, self.length):
-            letters = "".join(
-                [
-                    self.grid[row_index][column_index]
-                    for row_index in range(0, self.depth)
-                ]
-            )
-            columns.append(letters)
-            columns.append(letters[::-1])
-        return columns
-
-    @property
-    def diagonal_lines(self) -> Set[str]:
+    def all_lines(self) -> List[str]:
         """
         Get all diagonal lines of grid
         also revert line included
         >>> self.grid
         [
-            ['u', 'f', 'h'],
-            ['o', 'q', 'i'],
+            ["a", "b", "c"],
+            ["m", "o", "y"]
         ]
-        >>> self.diagonal_lines
-        ["u", "uq", "qu", "fi", "if", "fo", "of", "h", "hq", "qh"]
+        >>> self.all_lines
+        {
+            "abc", "cba", "moy", "yom",
+            "am", "ma", "bo", "ob", "cy", "yc",
+            "ao", "oa", "a", "by", "yb", "bm", "mb", "c", "co", "oc",
+        }
         """
-        diagonals = set()
-        offset = 0
-        for _ in range(0, self.length):
+        words = set()
+        for length_index in range(0, self.length):
+            vertical_letters = []
             left_letters, right_letters = [], []
-            for column_index in range(0, self.depth):
-                right_index = column_index + offset
-                if column_index == 0:
-                    left_letters.append(self.grid[column_index][right_index])
-                    right_letters.append(self.grid[column_index][right_index])
+            for depth_index in range(0, self.depth):
+                if length_index == 0:
+                    horizontal_letters = "".join(self.grid[depth_index])
+                    words.add(horizontal_letters)
+                    words.add(horizontal_letters[::-1])
+
+                vertical_letters.append(self.grid[depth_index][length_index])
+
+                right_index = length_index + depth_index
+                if depth_index == 0:
+                    left_letters.append(self.grid[depth_index][right_index])
+                    right_letters.append(self.grid[depth_index][right_index])
                     continue
 
                 if right_index < self.length:
-                    right_letters.append(self.grid[column_index][right_index])
+                    right_letters.append(self.grid[depth_index][right_index])
 
-                left_index = right_index - 2
+                left_index = length_index - depth_index
                 if self.length > left_index >= 0:
-                    left_letters.append(self.grid[column_index][left_index])
+                    left_letters.append(self.grid[depth_index][left_index])
 
-            offset += 1
             right_letters = "".join(right_letters)
             if right_letters:
-                diagonals.add(right_letters)
-                diagonals.add(right_letters[::-1])
+                words.add(right_letters)
+                words.add(right_letters[::-1])
 
             left_letters = "".join(left_letters)
             if left_letters:
-                diagonals.add(left_letters)
-                diagonals.add(left_letters[::-1])
-        return diagonals
+                words.add(left_letters)
+                words.add(left_letters[::-1])
+
+            vertical_letters = "".join(vertical_letters)
+            words.add(vertical_letters)
+            words.add(vertical_letters[::-1])
+        return list(words)
 
     @property
     def lines(self) -> List[str]:
@@ -217,11 +185,7 @@ class Grid:
         - diagonal
         """
         if not self._lines:
-            self._lines = [
-                *self.vertical_lines,
-                *self.horizontal_lines,
-                *self.diagonal_lines,
-            ]
+            self._lines = self.all_lines()
         return self._lines
 
 
@@ -252,7 +216,7 @@ class GridMaker:
         :return: puzzle
         """
         result = [self._random_row() for _ in range(self.depth)]
-        return Grid(result, self.length, self.depth)
+        return Grid(result, length=self.length, depth=self.depth)
 
 
 class Finder:

@@ -111,7 +111,7 @@ def test_grid_letters(grid):
     assert grid._letters == exp_letters
 
 
-def test_grid_horizontal_lines(grid):
+def test_grid_all_lines(grid):
     """
     Grid:
     [
@@ -119,30 +119,29 @@ def test_grid_horizontal_lines(grid):
         ["m", "o", "y"]
     ]
     """
-    assert grid.horizontal_lines == ["abc", "cba", "moy", "yom"]
-
-
-def test_grid_vertical_lines(grid):
-    """
-    Grid:
-    [
-        ["a", "b", "c"],
-        ["m", "o", "y"]
-    ]
-    """
-    assert grid.vertical_lines == ["am", "ma", "bo", "ob", "cy", "yc"]
-
-
-def test_grid_diagonal_lines(grid):
-    """
-    Grid:
-    [
-        ["a", "b", "c"],
-        ["m", "o", "y"]
-    ]
-    """
-    exp_words = ("ao", "oa", "a", "by", "yb", "bm", "mb", "c", "co", "oc")
-    result = grid.diagonal_lines
+    exp_words = (
+        "abc",
+        "cba",
+        "moy",
+        "yom",
+        "am",
+        "ma",
+        "bo",
+        "ob",
+        "cy",
+        "yc",
+        "ao",
+        "oa",
+        "a",
+        "by",
+        "yb",
+        "bm",
+        "mb",
+        "c",
+        "co",
+        "oc",
+    )
+    result = grid.all_lines()
     assert len(result) == len(exp_words)
     for exp_word in exp_words:
         assert exp_word in result
