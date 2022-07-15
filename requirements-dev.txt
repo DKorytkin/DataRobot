@@ -32,7 +32,7 @@ zipp==0.5.2
 # for tests
 pytest==5.0.1
 coverage==4.5.4
-codecov==2.0.15
+codecov==2.0.16
 pytest-cov==2.7.1
 flake8==3.7.8
 black==19.3b0
